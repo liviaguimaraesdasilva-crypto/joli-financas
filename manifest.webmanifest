@@ -1,0 +1,21 @@
+{
+  "name": "JOLI — Nossa Vida Financeira",
+  "short_name": "JOLI",
+  "description": "Sistema financeiro pessoal de Lívia e João Pedro",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F5F7F5",
+  "theme_color": "#0E3B2C",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0E3B2C"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="JOLI"><link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png"><link rel="stylesheet" href="styles.css">
+<title>JOLI — Nossa Vida Financeira</title>
+</head>
+<body>
+<section id="auth" class="auth">
+  <div class="auth-card"><div class="logo">J</div><span class="kicker">LÍVIA + JOÃO PEDRO</span>
+  <h1>JOLI</h1><p>Nossa vida, nossos planos, nosso dinheiro.</p>
+  <form id="authForm"><label>E-mail<input id="email" type="email" required></label>
+  <label>Senha<input id="password" type="password" minlength="6" required></label>
+  <button class="btn primary full">Entrar</button></form>
+  <button id="signup" class="link-btn">Criar a conta da JOLI</button><small id="authMsg"></small></div>
+</section>
+
+<div id="app" class="app">
+<header>
+  <div><span class="kicker">JOLI</span><h1>Nossa vida financeira</h1></div>
+  <div class="header-actions"><span id="sync">● online</span><button id="theme">☾</button></div>
+</header>
+<main>
+<section id="home" class="page active">
+  <div class="welcome"><div><span class="muted">Olá, JOLI 👋</span><h2>Visão geral</h2></div>
+  <div class="month"><button id="prev">‹</button><strong id="month"></strong><button id="next">›</button></div></div>
+  <div id="importBanner" class="import-banner hidden"><div><b>Seu histórico está pronto</b><span id="importDescription"></span></div><button id="importHistory" class="btn light">Importar histórico</button></div>
+  <article class="hero"><div><span>Saldo do mês</span><strong id="balance">R$ 0,00</strong><small id="rate">0% de economia</small></div>
+  <div><span>Receitas</span><b id="income">R$ 0,00</b><span>Despesas</span><b id="expenses">R$ 0,00</b></div></article>
+  <div class="kpis"><article><span>Patrimônio</span><strong id="netWorth">R$ 0,00</strong></article><article><span>FIV líquida</span><strong id="fivNet">R$ 0,00</strong></article><article><span>Metas</span><strong id="goalsPct">0%</strong></article></div>
+  <article class="card advisor"><div class="title"><div><span>CONSULTOR JOLI</span><h3>Leitura do momento</h3></div></div><p id="advisor"></p></article>
+  <div class="quick">
+    <button data-open="transaction" data-type="expense">−<b>Despesa</b></button><button data-open="transaction" data-type="income">+<b>Receita</b></button>
+    <button data-page="fiv">♡<b>FIV</b></button><button data-page="apartment">⌂<b>Apartamento</b></button>
+    <button data-page="trips">✈<b>Viagens</b></button><button data-page="archive">▤<b>Planilha</b></button>
+  </div>
+  <article class="card"><div class="title"><div><span>DISTRIBUIÇÃO</span><h3>Para onde foi o dinheiro</h3></div></div><div class="chart-row"><canvas id="donut" width="230" height="230"></canvas><div id="legend"></div></div></article>
+  <article class="card"><div class="title"><div><span>ATIVIDADE</span><h3>Últimos lançamentos</h3></div><button class="link-btn" data-page="transactions">Ver todos</button></div><div id="recent"></div></article>
+</section>
+
+<section id="transactions" class="page"><div class="page-head"><div><span class="kicker">MOVIMENTAÇÕES</span><h2>Lançamentos</h2></div><button class="btn primary" data-open="transaction">+ Novo</button></div>
+<div class="filters"><input id="search" placeholder="Buscar..."><select id="moduleFilter"><option value="">Todos os módulos</option><option>Casa</option><option>FIV</option><option>Apartamento</option><option>Viagem</option><option>Geral</option></select><select id="typeFilter"><option value="">Receitas e despesas</option><option value="expense">Despesas</option><option value="income">Receitas</option></select></div><p class="muted">Clique em qualquer lançamento para abrir as observações e editar o registro.</p><div id="allTransactions"></div></section>
+
+<section id="fiv" class="page"><div class="page-head"><div><span class="kicker">NOSSA JORNADA</span><h2>FIV</h2></div><button class="btn primary" data-open="transaction" data-module="FIV">+ Gasto</button></div>
+<div class="module-hero fiv-hero"><span>Total bruto registrado</span><strong id="fivGross">R$ 0,00</strong><div class="module-grid"><div><span>Reembolsos</span><b id="fivRefund">R$ 0,00</b></div><div><span>Custo líquido</span><b id="fivCost">R$ 0,00</b></div></div></div>
+<article class="card"><div class="title"><div><span>DETALHAMENTO</span><h3>Gastos por etapa</h3></div></div><div id="fivBreakdown"></div></article>
+<article class="card"><div class="title"><div><span>REEMBOLSOS DETALHADOS</span><h3>Por operadora e situação</h3></div></div><div id="claimList"></div></article><article class="card"><div class="title"><div><span>LINHA DO TEMPO</span><h3>Histórico da FIV</h3></div></div><div id="fivTimeline"></div></article></section>
+
+<section id="apartment" class="page"><div class="page-head"><div><span class="kicker">NOSSO LAR</span><h2>Apartamento</h2></div><button class="btn primary" data-open="apartment">Configurar</button></div><div id="apartmentContent"></div>
+<article class="card"><div class="title"><div><span>INVESTIMENTOS</span><h3>Gastos com apartamento</h3></div><button class="link-btn" data-open="transaction" data-module="Apartamento">Adicionar</button></div><div id="apartmentTransactions"></div></article></section>
+
+<section id="trips" class="page"><div class="page-head"><div><span class="kicker">MUNDO JOLI</span><h2>Viagens</h2></div><button class="btn primary" data-open="trip">+ Viagem</button></div><div id="tripList"></div></section>
+
+<section id="assets" class="page"><div class="page-head"><div><span class="kicker">PATRIMÔNIO</span><h2>Contas e bens</h2></div><button class="btn primary" data-open="account">+ Item</button></div><div class="module-hero"><span>Patrimônio líquido informado</span><strong id="assetsTotal">R$ 0,00</strong></div><div id="accountList" class="cards-grid"></div></section>
+
+<section id="cards" class="page"><div class="page-head"><div><span class="kicker">CARTÕES</span><h2>Faturas e limites</h2></div><button class="btn primary" data-open="card">+ Cartão</button></div><div id="cardList" class="cards-grid"></div></section>
+
+<section id="goals" class="page"><div class="page-head"><div><span class="kicker">PLANOS</span><h2>Metas da JOLI</h2></div><button class="btn primary" data-open="goal">+ Meta</button></div><div id="goalList" class="cards-grid"></div></section>
+
+<section id="story" class="page"><div class="page-head"><div><span class="kicker">NOSSA HISTÓRIA</span><h2>Momentos da JOLI</h2></div><button class="btn primary" data-open="event">+ Momento</button></div><div id="storyList" class="story"></div></section>
+
+
+<section id="archive" class="page"><div class="page-head"><div><span class="kicker">ARQUIVO ORIGINAL</span><h2>Tudo da planilha</h2></div></div>
+<p class="muted">Aqui ficam as linhas originais, inclusive totais de cartão, gastos individuais, valores zerados, contas pendentes e observações. Esses registros não são somados novamente ao saldo.</p>
+<div class="filters"><select id="archiveMonth"><option value="">Todos os meses e FIV</option></select><input id="archiveSearch" placeholder="Buscar categoria, pessoa ou observação..."><select id="archiveType"><option value="">Todas as linhas</option><option value="notes">Somente com observação</option><option value="pending">Somente pendentes</option><option value="summary">Resumos e cartões</option></select></div>
+<div id="archiveList"></div></section>
+<section id="assistant" class="page"><div class="page-head"><div><span class="kicker">CONSULTOR JOLI</span><h2>Pergunte aos seus dados</h2></div></div>
+<div class="assistant-box"><p>Exemplos: “Quanto gastamos com FIV?”, “Qual foi o mês mais caro?”, “Quanto a Lívia pagou?”</p><div><input id="question" placeholder="Digite sua pergunta..."><button id="ask" class="btn primary">Perguntar</button></div><article id="answer"></article></div></section>
+
+<section id="settings" class="page"><div class="page-head"><div><span class="kicker">AJUSTES</span><h2>Dados e preferências</h2></div></div>
+<article class="card"><h3>Importação</h3><p>O histórico da planilha pode ser importado uma única vez e é protegido contra duplicidade.</p><button id="importHistorySettings" class="btn primary full">Importar histórico da planilha</button></article>
+<article class="card"><h3>Arquivos bancários</h3><p>Importe um arquivo OFX do banco. Os lançamentos ficam disponíveis para revisão.</p><label class="upload">Selecionar OFX<input id="ofxFile" type="file" accept=".ofx"></label></article>
+<article class="card"><h3>Exportação</h3><div class="row-actions"><button id="csv" class="btn secondary">Exportar CSV</button><button id="backup" class="btn secondary">Backup JSON</button></div></article>
+<article class="card"><h3>Conta</h3><button id="logout" class="btn secondary full">Sair</button></article></section>
+</main>
+
+<button class="fab" data-open="transaction">+</button>
+<nav>
+<button class="active" data-page="home">⌂<small>Início</small></button><button data-page="transactions">≡<small>Movimentos</small></button>
+<button data-page="fiv">♡<small>FIV</small></button><button data-page="assets">◈<small>Patrimônio</small></button>
+<button data-page="settings">⚙<small>Ajustes</small></button>
+</nav>
+</div>
+
+<dialog id="transactionModal"><form id="transactionForm" class="modal">
+<div class="modal-head"><div><span class="kicker">LANÇAMENTO</span><h2>Novo registro</h2></div><button type="button" data-close>×</button></div>
+<div class="segments"><button type="button" class="active" data-tx="expense">Despesa</button><button type="button" data-tx="income">Receita</button></div>
+<input id="txType" type="hidden" value="expense"><label>Valor<input id="txAmount" inputmode="decimal" required></label>
+<label>Descrição<input id="txDescription" required></label><div class="cols"><label>Categoria<select id="txCategory"><option>Casa</option><option>Moradia</option><option>Saúde</option><option>Alimentação</option><option>Transporte</option><option>Lazer</option><option>Imóveis</option><option>Receitas</option><option>Reembolsos</option><option>Outros</option></select></label><label>Módulo<select id="txModule"><option>Casa</option><option>Geral</option><option>FIV</option><option>Apartamento</option><option>Viagem</option></select></label></div>
+<div class="cols"><label>Data<input id="txDate" type="date" required></label><label>Quem<select id="txPerson"><option>Lívia</option><option>João Pedro</option><option>JOLI</option></select></label></div>
+<div class="cols"><label>Pagamento<select id="txPayment"><option>Pix</option><option>Cartão BB</option><option>Cartão Itaú</option><option>Cartão Nubank</option><option>Débito automático</option><option>Transferência</option><option>Dinheiro</option></select></label><label>Status<select id="txStatus"><option value="paid">Pago</option><option value="planned">Previsto</option></select></label></div>
+<label>Observações e registro<textarea id="txNotes" placeholder="Ex.: conta paga duas vezes; reembolso solicitado; administradora devolverá no mês seguinte..."></textarea></label>
+<div class="note-box"><div class="note-box-head"><b>Reembolso</b><label class="switch-line"><input id="txHasRefund" type="checkbox"> Este lançamento tem reembolso</label></div>
+<div id="refundFields" class="hidden">
+<div class="cols"><label>Reembolsado por<input id="txRefundProvider" placeholder="Ex.: SulAmérica"></label><label>Situação<select id="txRefundStatus"><option value="">Não informado</option><option value="requested">Solicitado</option><option value="partial">Recebido parcialmente</option><option value="received">Recebido integralmente</option><option value="denied">Negado</option></select></label></div>
+<div class="cols"><label>Valor reembolsado<input id="txRefundAmount" inputmode="decimal"></label><label>Data do reembolso<input id="txRefundDate" type="date"></label></div>
+</div></div>
+<div class="note-box"><b>Ocorrência especial</b><select id="txIssueType"><option value="">Nenhuma</option><option value="duplicate_payment">Pagamento duplicado</option><option value="refund_pending">Reembolso pendente</option><option value="amount_adjustment">Valor ajustado posteriormente</option><option value="other">Outro registro importante</option></select></div>
+<input id="txId" type="hidden"><div class="row-actions"><button id="deleteTx" type="button" class="btn danger hidden">Excluir</button><button class="btn primary full">Salvar</button></div></form></dialog>
+
+<dialog id="apartmentModal"><form id="apartmentForm" class="modal"><div class="modal-head"><h2>Apartamento</h2><button type="button" data-close>×</button></div>
+<label>Nome<input id="aptName" value="Apartamento Botafogo" required></label><div class="cols"><label>Valor do imóvel<input id="aptValue" inputmode="decimal" required></label><label>Entrada<input id="aptDown" inputmode="decimal" value="65500"></label></div>
+<div class="cols"><label>Valor financiado<input id="aptFinanced" inputmode="decimal"></label><label>Saldo devedor<input id="aptBalance" inputmode="decimal"></label></div>
+<div class="cols"><label>Parcela atual<input id="aptPayment" inputmode="decimal"></label><label>Total de parcelas<input id="aptTotal" type="number"></label></div><label>Parcelas pagas<input id="aptPaid" type="number" value="0"></label><button class="btn primary full">Salvar</button></form></dialog>
+
+<dialog id="simpleModal"><form id="simpleForm" class="modal"><div class="modal-head"><h2 id="simpleTitle"></h2><button type="button" data-close>×</button></div><div id="simpleFields"></div><button class="btn primary full">Salvar</button></form></dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="historical-data.js"></script><script src="app.js"></script>
+</body></html>

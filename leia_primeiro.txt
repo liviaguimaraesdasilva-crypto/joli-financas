@@ -1,0 +1,40 @@
+JOLI — NOSSA VIDA FINANCEIRA
+VERSÃO FINAL COM IMPORTAÇÃO DA PLANILHA
+
+A planilha foi convertida em:
+- 220 lançamentos históricos
+- gastos mensais de março/2025 a julho/2026
+- FIV: bruto R$ 98,904.94
+- reembolsos da FIV: R$ 39,185.83
+- custo líquido da FIV: R$ 59,719.11
+- dois momentos iniciais em “Nossa História”
+
+COMO INSTALAR
+1. No Supabase, abra SQL Editor.
+2. Execute todo o arquivo ATUALIZACAO_SUPABASE_FINAL.sql.
+3. No Netlify, arraste o arquivo JOLI_APP_FINAL.zip para uma nova implantação.
+4. Entre normalmente no aplicativo.
+5. Clique em “Importar histórico da JOLI”.
+6. Confira o painel da FIV e os meses anteriores.
+
+A importação possui proteção contra duplicidade.
+Você pode clicar novamente caso a conexão seja interrompida.
+
+OBSERVAÇÃO SOBRE A PLANILHA
+Os gastos mensais foram importados como valores consolidados por categoria e imóvel.
+A aba da FIV foi importada item a item. O total de reembolsos foi preservado exatamente
+como aparece na planilha, pois nem todo o detalhamento desse total estava descrito linha a linha.
+
+
+ATUALIZAÇÃO: clique em qualquer lançamento para editar observações, pagamento duplicado e informações de reembolso.
+
+ATUALIZAÇÃO — INCORPORAÇÃO COMPLETA DA PLANILHA
+- 305 linhas originais preservadas no Arquivo da Planilha.
+- Inclui totais de cartão, Gastos Lívia, Gastos João, linhas zeradas e pendentes.
+- Inclui todas as observações exatamente como estavam escritas.
+- 8 reembolsos da FIV detalhados por operadora.
+- Esses registros de arquivo não são somados novamente aos lançamentos, evitando duplicidade.
+
+Depois de executar o SQL e publicar esta versão, clique novamente em
+“Importar histórico” para sincronizar os campos novos. Os lançamentos existentes
+serão atualizados, não duplicados.
